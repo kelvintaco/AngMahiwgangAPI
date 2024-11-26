@@ -10,24 +10,20 @@ namespace SystemMonitoringAPI.Context
     {
         public DbSet<Items> Items { get; set; }
         public DbSet<Borrowers> Borrowers { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Stocks> Stocks { get; set; }
         public DbSet<Transactions> Transactions { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         #region 
-        //for key less models
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
-        //modelBuilder.Entity<Transactions>().OwnsOne(a => a.Borrowers); 
-        //base.OnModelCreating(modelBuilder);
-        //}
+        //    modelBuilder.Entity<Transactions>()
+        //        .HasMany(t => t.Items)
+        //        .WithMany(i => i.Transactions);
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //  optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=SystemDB;Trusted_Connection=True;TrustServerCertificate=True");
-        //base.OnConfiguring(optionsBuilder);
+        //    modelBuilder.Entity<Transactions>()
+        //        .HasMany(t => t.Borrowers)
+        //        .WithMany(b => b.Transactions);
         //}
         #endregion
     }

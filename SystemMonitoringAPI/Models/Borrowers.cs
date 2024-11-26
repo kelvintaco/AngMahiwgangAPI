@@ -13,5 +13,7 @@ namespace SystemMonitoringAPI.Models
         public int DprCode { get; set; }
         public string DprName { get; set; }
 
+        public Transactions Transactions { get; set; }
+
     }
 }

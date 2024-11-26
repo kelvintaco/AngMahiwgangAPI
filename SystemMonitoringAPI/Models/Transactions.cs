@@ -11,9 +11,10 @@ namespace SystemMonitoringAPI.Models
         public string BrwCode { get; set; }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string TransID { get; set; }
         public DateOnly BorrowDate { get; set; }
 
-        public IEnumerable<Items> Items { get; set; }
-        public IEnumerable<Borrowers> Borrowers { get; set; }
+        public Items Items { get; set; }
+        public Borrowers Borrowers { get; set; }  
     }
 }

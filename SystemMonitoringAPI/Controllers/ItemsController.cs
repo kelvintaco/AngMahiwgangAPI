@@ -27,6 +27,18 @@ namespace SystemMonitoringAPI.Controllers
             return _dataContext.Items.SingleOrDefault(x => x.ItemCode == id);
         }
 
+        [HttpGet("byIsOnBorrowed/{isborrow}", Name = "GetIsOnBorrow")]
+        public Items GetIsOnBorrow(int isborrow)
+        {
+            return _dataContext.Items.SingleOrDefault(x => x.onBorrow == isborrow);
+        }
+
+        [HttpGet("byIsNotOnBorrow/{isnotonborrow}", Name = "GetIsNotOnBorrow")]
+        public Items GetIsNotOnBorrow(int isnotonborrow)
+        {
+            return _dataContext.Items.SingleOrDefault(x => x.isnotonBorrow == isnotonborrow);
+        }
+
         //-------- Post Method
         [HttpPost]
         public void Post([FromBody] Items item)

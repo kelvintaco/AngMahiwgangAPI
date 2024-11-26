@@ -15,10 +15,22 @@ namespace SystemMonitoringAPI.Controllers
         {
             _dataContext = dataContext;
         }
+        [HttpGet("item-index")]
+        public IActionResult ItemIndex()
+        {
+            var itemtransactions = _dataContext.Transactions.Include(x => x.Items).ToList();
+            return View(itemtransactions);
+        }
+        [HttpGet("bor-index")]
+        public IActionResult BorIndex()
+        {
+            var bortransactions = _dataContext.Transactions.Include(x => x.Borrowers).ToList();
+            return View(bortransactions);
+        }
 
         //--------- Get All Transactions
         [HttpGet]
-        public IEnumerable<Transactions> Get()
+        public ICollection<Transactions> Get()
         {
             return _dataContext.Transactions
                 .Include(t => t.Items) // Include related Items data
@@ -28,22 +40,25 @@ namespace SystemMonitoringAPI.Controllers
 
         //--------- Get Transaction by ItemCode
         [HttpGet("byItemCode/{itmcode}", Name = "GetItemCode")]
-        public Transactions GetItemCode(int itmcode)
+        public ICollection<Transactions> GetItemCode(int itmcode)
         {
             return _dataContext.Transactions
                 .Include(t => t.Items)
                 .Include(t => t.Borrowers)
-                .SingleOrDefault(x => x.ItemCode == itmcode);
+                .Where(x => x.ItemCode == itmcode)
+                .ToList();
+
         }
 
         //--------- Get Transaction by BrwCode
         [HttpGet("byBrwCode/{brwcode}", Name = "GetBrwCode")]
-        public Transactions GetBrwCode(string brwcode)
+        public ICollection<Transactions> GetBrwCode(string brwcode)
         {
             return _dataContext.Transactions
                 .Include(t => t.Items)
                 .Include(t => t.Borrowers)
-                .SingleOrDefault(x => x.BrwCode == brwcode);
+                .Where(x => x.BrwCode == brwcode)
+                .ToList();
         }
     }
 }

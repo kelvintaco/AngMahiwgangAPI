@@ -12,5 +12,7 @@ namespace SystemMonitoringAPI.Models
         public double ItemPrice { get; set; }
         public int onBorrow { get; set; }
         public int isnotonBorrow { get; set; }
+
+        public Transactions Transactions { get; set; }
     }
 }

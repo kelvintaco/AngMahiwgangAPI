@@ -27,6 +27,17 @@ namespace SystemMonitoringAPI.Controllers
             return _dataContext.Borrowers.SingleOrDefault(x => x.BrwCode == brwid);
         }
 
+        [HttpGet("byDprid/{dprid}", Name = "GetDprid")]
+        public Borrowers GetDprid(int dprid)
+        {
+            return _dataContext.Borrowers.SingleOrDefault(x => x.DprCode == dprid);
+        }
+        [HttpGet("byDprnm{dprnm}", Name = "GetDprnm")]
+        public Borrowers GetDprnm(string dprnm)
+        {
+            return _dataContext.Borrowers.SingleOrDefault(x => x.DprName == dprnm);
+        }
+
         //-------- Post Method
         [HttpPost]
         public void Post([FromBody] Borrowers borrowers)
