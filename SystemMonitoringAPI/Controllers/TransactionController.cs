@@ -30,7 +30,7 @@ namespace SystemMonitoringAPI.Controllers
 
         //--------- Get All Transactions
         [HttpGet]
-        public ICollection<Transactions> Get()
+        public List<Transactions> Get()
         {
             return _dataContext.Transactions
                 .Include(t => t.Items) // Include related Items data
@@ -40,7 +40,7 @@ namespace SystemMonitoringAPI.Controllers
 
         //--------- Get Transaction by ItemCode
         [HttpGet("byItemCode/{itmcode}", Name = "GetItemCode")]
-        public ICollection<Transactions> GetItemCode(int itmcode)
+        public List<Transactions> GetItemCode(int itmcode)
         {
             return _dataContext.Transactions
                 .Include(t => t.Items)
@@ -52,7 +52,7 @@ namespace SystemMonitoringAPI.Controllers
 
         //--------- Get Transaction by BrwCode
         [HttpGet("byBrwCode/{brwcode}", Name = "GetBrwCode")]
-        public ICollection<Transactions> GetBrwCode(string brwcode)
+        public List<Transactions> GetBrwCode(string brwcode)
         {
             return _dataContext.Transactions
                 .Include(t => t.Items)

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections;
+using System.Text.Json.Serialization;
 
 namespace SystemMonitoringAPI.Models
 {
@@ -13,6 +14,7 @@ namespace SystemMonitoringAPI.Models
         public int DprCode { get; set; }
         public string DprName { get; set; }
 
+        [JsonIgnore]
         public Transactions Transactions { get; set; }
 
     }

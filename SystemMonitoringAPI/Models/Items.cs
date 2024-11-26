@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SystemMonitoringAPI.Models
 {
@@ -13,6 +14,7 @@ namespace SystemMonitoringAPI.Models
         public int onBorrow { get; set; }
         public int isnotonBorrow { get; set; }
 
+        [JsonIgnore]
         public Transactions Transactions { get; set; }
     }
 }
