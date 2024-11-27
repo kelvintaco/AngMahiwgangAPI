@@ -30,12 +30,12 @@ namespace SystemMonitoringAPI.Controllers
 
         //--------- Get All Transactions
         [HttpGet]
-        public List<Transactions> Get()
+        public Transactions Get()
         {
             return _dataContext.Transactions
-                .Include(t => t.Items) // Include related Items data
-                .Include(t => t.Borrowers) // Include related Borrowers data
-                .ToList();
+                .Include(t => t.Items)
+                .Include(t => t.Borrowers)
+                .FirstOrDefault();
         }
 
         //--------- Get Transaction by ItemCode
