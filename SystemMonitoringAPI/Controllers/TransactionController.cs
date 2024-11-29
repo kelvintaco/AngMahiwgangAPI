@@ -60,5 +60,41 @@ namespace SystemMonitoringAPI.Controllers
                 .Where(x => x.BrwCode == brwcode)
                 .ToList();
         }
+        [HttpPost]
+        public IActionResult CreateTransaction([FromBody] TransactionRequest request)
+        {
+            var transaction = new Transactions
+            {
+                ItemCode = GenerateItemCode(),
+                BrwCode = GenerateBrwCode(),
+                TransID = GenerateTransId(),
+                BorrowDate = DateOnly.FromDateTime(DateTime.Now),
+                Items = _dataContext.Items.Find(request.ItemId),
+                Borrowers = _dataContext.Borrowers.Find(request.BorrowerName)
+            };
+
+            _dataContext.Transactions.Add(transaction);
+            _dataContext.SaveChanges(); //error create the module enter borrower details first -> enter item to borrow -> then store it into the transaction table
+
+            return CreatedAtAction(nameof(Get), new { id = transaction.ItemCode }, transaction);
+        }
+
+        private int GenerateItemCode()
+        {
+            return _dataContext.Transactions.Max(t => t.ItemCode) + 1;
+        }
+
+        private string GenerateBrwCode()
+        {
+            int brwCodeNumber = int.Parse(_dataContext.Transactions.Max(t => t.BrwCode.Substring(3))) + 1;
+            return $"BRW{brwCodeNumber:D2}";
+        }
+
+        private string GenerateTransId()
+        {
+            string lastTransId = _dataContext.Transactions.Max(t => t.TransID);
+            int transIdNumber = int.Parse(lastTransId.Replace("TR", "")) + 1;
+            return $"TR{transIdNumber:D3}";
+        }
     }
 }
