@@ -15,16 +15,13 @@ namespace SystemMonitoringAPI.Context
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         #region 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Transactions>()
-        //        .HasMany(t => t.Items)
-        //        .WithMany(i => i.Transactions);
-
-        //    modelBuilder.Entity<Transactions>()
-        //        .HasMany(t => t.Borrowers)
-        //        .WithMany(b => b.Transactions);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Items>()
+                .HasOne(i => i.Transactions)
+                .WithMany()
+                .IsRequired(false);
+        }
         #endregion
     }
 }

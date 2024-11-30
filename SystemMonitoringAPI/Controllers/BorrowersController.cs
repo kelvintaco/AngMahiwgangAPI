@@ -37,6 +37,11 @@ namespace SystemMonitoringAPI.Controllers
         {
             return _dataContext.Borrowers.SingleOrDefault(x => x.DprName == dprnm);
         }
+        [HttpGet("dprnames")]
+        public List<string> GetDprNames()
+        {
+            return _dataContext.Borrowers.Select(b => b.DprName).ToList();
+        }
 
         //-------- Post Method
         [HttpPost]

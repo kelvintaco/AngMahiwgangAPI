@@ -20,6 +20,11 @@ namespace SystemMonitoringAPI.Controllers
         {
             return _dataContext.Items;
         }
+        [HttpGet("itemnames")]
+        public List<string> GetItemNames()
+        {
+            return _dataContext.Items.Select(i => i.ItemName).ToList();
+        }
 
         [HttpGet("{id}", Name = "Get")]
         public Items Get(int id)
@@ -51,6 +56,20 @@ namespace SystemMonitoringAPI.Controllers
         public void Put([FromBody] Items item)
         {
             _dataContext.Items.Update(item);
+            _dataContext.SaveChanges();
+        }
+
+        [HttpPut("byItemCode/{itemCode}", Name = "UpdateBorrowStatus")]
+        public void UpdateBorrowStatus(int itemCode, [FromBody] Items itemcode)
+        {
+            // Find the item by ItemCode
+            var item = _dataContext.Items.FirstOrDefault(i => i.ItemCode == itemCode);
+
+            // Update the onBorrow and isnotonBorrow fields
+            item.onBorrow = itemcode.onBorrow;
+            item.isnotonBorrow = itemcode.isnotonBorrow;
+
+            // Save changes to the database
             _dataContext.SaveChanges();
         }
 

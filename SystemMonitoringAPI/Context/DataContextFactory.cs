@@ -12,5 +12,6 @@ namespace SystemMonitoringAPI.Context
 
             return new DataContext(options.Options);
         }
+
     }
 }
