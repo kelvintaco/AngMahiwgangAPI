@@ -27,11 +27,11 @@ namespace SystemMonitoringAPI.Controllers
             return _dataContext.Borrowers.SingleOrDefault(x => x.BrwCode == brwid);
         }
 
-        [HttpGet("byDprid/{dprid}", Name = "GetDprid")]
-        public Borrowers GetDprid(int dprid)
-        {
-            return _dataContext.Borrowers.SingleOrDefault(x => x.DprCode == dprid);
-        }
+        //[HttpGet("byDprid/{dprid}", Name = "GetDprid")]
+        //public Borrowers GetDprid(int dprid)
+        //{
+        //    return _dataContext.Borrowers.SingleOrDefault(x => x.DprCode == dprid);
+        //}
         [HttpGet("byDprnm{dprnm}", Name = "GetDprnm")]
         public Borrowers GetDprnm(string dprnm)
         {
@@ -44,7 +44,7 @@ namespace SystemMonitoringAPI.Controllers
         }
 
         //-------- Post Method
-        [HttpPost]
+        [HttpPost("NewBor")]
         public void Post([FromBody] Borrowers borrowers)
         {
             _dataContext.Borrowers.Add(borrowers);
@@ -58,10 +58,10 @@ namespace SystemMonitoringAPI.Controllers
             _dataContext.SaveChanges();
         }
 
-        [HttpDelete("byBrwCode{brwid}", Name = "DeleteByBrwCode")]
-        public void DeleteByBrwCode(string brwid)
+        [HttpDelete("byBrwName{brwname}", Name = "DeleteByBrwName")]
+        public void DeleteByBrwCode(string brwname)
         {
-            var brw = _dataContext.Borrowers.FirstOrDefault(x => x.BrwCode == brwid);
+            var brw = _dataContext.Borrowers.FirstOrDefault(x => x.BrwName == brwname);
             if (brw != null)
             {
                 _dataContext.Borrowers.Remove(brw);

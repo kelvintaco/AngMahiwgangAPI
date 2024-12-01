@@ -11,11 +11,11 @@ namespace SystemMonitoringAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string BrwCode { get; set; }
         public string BrwName { get; set; }
-        public int DprCode { get; set; }
+        //public int DprCode { get; set; }
         public string DprName { get; set; }
 
-        [JsonIgnore]
-        public Transactions Transactions { get; set; }
+        //[JsonIgnore]
+        //public Transactions Transactions { get; set; }
 
     }
 }

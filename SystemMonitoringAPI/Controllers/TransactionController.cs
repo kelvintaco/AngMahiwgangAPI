@@ -60,31 +60,32 @@ namespace SystemMonitoringAPI.Controllers
                 .Where(x => x.BrwCode == brwcode)
                 .ToList();
         }
-        [HttpPost]
-        public IActionResult CreateTransaction([FromBody] Transactions request)
-        {
-            // Find the item by ItemName
-            var item = _dataContext.Items.FirstOrDefault(i => i.ItemName == request.ItemName);
+        //[HttpPost]
+        //public IActionResult CreateTransaction([FromBody] Transactions request)
+        //{
+        //    // Find the item by ItemName
+        //    var item = _dataContext.Items.FirstOrDefault(i => i.ItemName == request.ItemName);
 
-            if (item == null)
-            {
-                return NotFound("Item not found");
-            }
+        //    if (item == null)
+        //    {
+        //        return NotFound("Item not found");
+        //    }
 
-            // Create a new transaction
-            var transaction = new Transactions
-            {
-                ItemCode = item.ItemCode,
-                BrwCode = Guid.NewGuid().ToString(), // Generate a new BrwCode
-                TransID = Guid.NewGuid().ToString(), // Generate a new TransId
-                BorrowDate = request.BorrowDate,
-            };
+        //    // Create a new transaction
+        //    var transaction = new Transactions
+        //    {
+        //        ItemCode = item.ItemCode,
+        //        BrwCode = Guid.NewGuid().ToString(), // Generate a new BrwCode
+        //        TransID = Guid.NewGuid().ToString(), // Generate a new TransId
+        //        BorrowDate = request.BorrowDate,
+        //        BorrowerName = request.BorrowerName
+        //    };
 
-            // Add the transaction to the database
-            _dataContext.Transactions.Add(transaction);
-            _dataContext.SaveChanges();
+        //    // Add the transaction to the database
+        //    _dataContext.Transactions.Add(transaction);
+        //    _dataContext.SaveChanges();
 
-            return Ok(new { message = "Transaction created successfully" });
-        }
+        //    return Ok(new { message = "Transaction created successfully" });
+        //}
     }
 }
