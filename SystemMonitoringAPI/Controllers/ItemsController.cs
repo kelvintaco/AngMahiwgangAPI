@@ -32,6 +32,12 @@ namespace SystemMonitoringAPI.Controllers
             return _dataContext.Items.SingleOrDefault(x => x.ItemCode == id);
         }
 
+        //[HttpGet("{itemcode}", Name = "GetItemCode")]
+        //public Items GetItemCode(int itemcode)
+        //{
+        //    return _dataContext.Items.SingleOrDefault(x => x.ItemCode == itemcode);
+        //}
+
         [HttpGet("byIsOnBorrowed/{isborrow}", Name = "GetIsOnBorrow")]
         public Items GetIsOnBorrow(int isborrow)
         {

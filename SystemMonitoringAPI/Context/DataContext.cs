@@ -21,6 +21,18 @@ namespace SystemMonitoringAPI.Context
                 .HasOne(i => i.Transactions)
                 .WithMany()
                 .IsRequired(false);
+
+            modelBuilder.Entity<Transactions>()
+               .Property(t => t.ItemName)
+               .HasColumnName("ItemName");
+
+            modelBuilder.Entity<Transactions>()
+                .Property(t => t.BrwName)
+                .HasColumnName("BrwName");
+
+            modelBuilder.Entity<Transactions>()
+                .Property(t => t.DprName)
+                .HasColumnName("DprName");
         }
         #endregion
     }

@@ -35,6 +35,18 @@ namespace SystemMonitoringAPI.Controllers
             return _dataContext.Transactions
                 .Include(t => t.Items)
                 .Include(t => t.Borrowers)
+                .Select(t => new Transactions
+                {
+                    ItemCode = t.ItemCode,
+                    ItemName = t.Items.ItemName,
+                    BrwCode = t.BrwCode,
+                    BrwName = t.Borrowers.BrwName,
+                    DprName = t.Borrowers.DprName,
+                    TransID = t.TransID,
+                    BorrowDate = t.BorrowDate,
+                    Items = t.Items,
+                    Borrowers = t.Borrowers
+                })
                 .ToList();
         }
 
@@ -59,6 +71,31 @@ namespace SystemMonitoringAPI.Controllers
                 .Include(t => t.Borrowers)
                 .Where(x => x.BrwCode == brwcode)
                 .ToList();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Transactions transactions)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var transaction = new Transactions
+            {
+                TransID = transactions.TransID,
+                ItemCode = transactions.ItemCode,
+                BrwCode = transactions.BrwCode,
+                BorrowDate = transactions.BorrowDate,
+                BrwName = transactions.BrwName,
+                DprName = transactions.DprName,
+                ItemName = transactions.ItemName
+            };
+
+            _dataContext.Transactions.Add(transaction);
+            await _dataContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), new { transID = transaction.TransID }, transaction);
         }
         //[HttpPost]
         //public IActionResult CreateTransaction([FromBody] Transactions request)

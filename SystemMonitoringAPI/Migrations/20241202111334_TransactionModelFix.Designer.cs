@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SystemMonitoringAPI.Context;
 
@@ -11,9 +12,11 @@ using SystemMonitoringAPI.Context;
 namespace SystemMonitoringAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241202111334_TransactionModelFix")]
+    partial class TransactionModelFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasKey("BrwCode");
 
-                    b.ToTable("Borrowers", (string)null);
+                    b.ToTable("Borrowers");
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Items", b =>
@@ -69,7 +72,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasIndex("TransactionsTransID");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Transactions", b =>
@@ -96,9 +99,8 @@ namespace SystemMonitoringAPI.Migrations
                     b.Property<int>("ItemCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ItemName")
+                        .HasColumnType("int");
 
                     b.HasKey("TransID");
 
@@ -106,7 +108,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasIndex("ItemCode");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Items", b =>
