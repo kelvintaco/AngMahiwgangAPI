@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SystemMonitoringAPI.Models
 {
@@ -19,7 +20,9 @@ namespace SystemMonitoringAPI.Models
         public string TransID { get; set; }
         public DateOnly BorrowDate { get; set; }
 
+        [JsonIgnore]
         public Items Items { get; set; }
+        [JsonIgnore]
         public Borrowers Borrowers { get; set; }
     }
 }
