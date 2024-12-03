@@ -74,28 +74,11 @@ namespace SystemMonitoringAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Transactions transactions)
+        public void Post([FromBody] Transactions transactions)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            _dataContext.Transactions.Add(transactions);
+            _dataContext.SaveChangesAsync();
 
-            var transaction = new Transactions
-            {
-                TransID = transactions.TransID,
-                ItemCode = transactions.ItemCode,
-                BrwCode = transactions.BrwCode,
-                BorrowDate = transactions.BorrowDate,
-                BrwName = transactions.BrwName,
-                DprName = transactions.DprName,
-                ItemName = transactions.ItemName
-            };
-
-            _dataContext.Transactions.Add(transaction);
-            await _dataContext.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(Get), new { transID = transaction.TransID }, transaction);
         }
         //[HttpPost]
         //public IActionResult CreateTransaction([FromBody] Transactions request)
