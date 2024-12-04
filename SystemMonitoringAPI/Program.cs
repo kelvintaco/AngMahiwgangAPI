@@ -10,7 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer("Server=.\\SQLEXPRESS;Database=SMPIdb;Trusted_Connection=True;TrustServerCertificate=True"));
+    options.UseSqlServer("Server=.\\SQLEXPRESS;Database=SMPIdb;Trusted_Connection=True;TrustServerCertificate=True"),
+    ServiceLifetime.Scoped);
+
+builder.Services.AddScoped<DataContext>();
 
 var app = builder.Build();
 

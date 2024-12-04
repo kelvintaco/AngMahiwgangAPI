@@ -38,7 +38,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasKey("BrwCode");
 
-                    b.ToTable("Borrowers");
+                    b.ToTable("Borrowers", (string)null);
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Items", b =>
@@ -69,7 +69,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasIndex("TransactionsTransID");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Transactions", b =>
@@ -109,7 +109,7 @@ namespace SystemMonitoringAPI.Migrations
 
                     b.HasIndex("ItemCode");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("SystemMonitoringAPI.Models.Items", b =>

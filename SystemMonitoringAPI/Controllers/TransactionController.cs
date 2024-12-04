@@ -77,8 +77,7 @@ namespace SystemMonitoringAPI.Controllers
         public void Post([FromBody] Transactions transactions)
         {
             _dataContext.Transactions.Add(transactions);
-            _dataContext.SaveChangesAsync();
-
+            _dataContext.SaveChanges();
         }
         //[HttpPost]
         //public IActionResult CreateTransaction([FromBody] Transactions request)
