@@ -62,6 +62,12 @@ namespace SystemMonitoringAPI.Controllers
 
         }
 
+        [HttpGet("transid")]
+        public List<string> GetTransID()
+        {
+            return _dataContext.Transactions.Select(b => b.TransID).ToList();
+        }
+
         //--------- Get Transaction by BrwCode
         [HttpGet("byBrwCode/{brwcode}", Name = "GetBrwCode")]
         public List<Transactions> GetBrwCode(string brwcode)
@@ -79,32 +85,15 @@ namespace SystemMonitoringAPI.Controllers
             _dataContext.Transactions.Add(transactions);
             _dataContext.SaveChanges();
         }
-        //[HttpPost]
-        //public IActionResult CreateTransaction([FromBody] Transactions request)
-        //{
-        //    // Find the item by ItemName
-        //    var item = _dataContext.Items.FirstOrDefault(i => i.ItemName == request.ItemName);
-
-        //    if (item == null)
-        //    {
-        //        return NotFound("Item not found");
-        //    }
-
-        //    // Create a new transaction
-        //    var transaction = new Transactions
-        //    {
-        //        ItemCode = item.ItemCode,
-        //        BrwCode = Guid.NewGuid().ToString(), // Generate a new BrwCode
-        //        TransID = Guid.NewGuid().ToString(), // Generate a new TransId
-        //        BorrowDate = request.BorrowDate,
-        //        BorrowerName = request.BorrowerName
-        //    };
-
-        //    // Add the transaction to the database
-        //    _dataContext.Transactions.Add(transaction);
-        //    _dataContext.SaveChanges();
-
-        //    return Ok(new { message = "Transaction created successfully" });
-        //}
+        [HttpDelete("byTransId/{transId}", Name = "DeleteByTransId")]
+        public void DeleteByTransId(string transId)
+        {
+            var trans = _dataContext.Transactions.FirstOrDefault(x => x.TransID == transId);
+            if (trans != null)
+            {
+                _dataContext.Transactions.Remove(trans);
+                _dataContext.SaveChanges();
+            }
+        }
     }
 }

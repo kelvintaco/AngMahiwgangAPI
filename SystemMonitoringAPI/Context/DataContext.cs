@@ -11,6 +11,7 @@ namespace SystemMonitoringAPI.Context
         public DbSet<Items> Items { get; set; }
         public DbSet<Borrowers> Borrowers { get; set; }
         public DbSet<Transactions> Transactions { get; set; }
+        public DbSet<DeletedTransactions> DeletedTransactions { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
