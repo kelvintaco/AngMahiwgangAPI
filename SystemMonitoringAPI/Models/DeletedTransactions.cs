@@ -20,8 +20,8 @@ namespace SystemMonitoringAPI.Models
         public int ItemCode { get; set; }
         public string ItemName { get; set; }
 
-        [JsonIgnore]
-        [ValidateNever]
-        public Transactions Transactions { get; set; }
+        //[JsonIgnore]
+        //[ValidateNever]
+        //public Transactions Transactions { get; set; }
     }
 }
